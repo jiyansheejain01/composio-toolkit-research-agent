@@ -1,0 +1,401 @@
+{
+  "total_apps": 100,
+  "auth_distribution": {
+    "OAuth2": 59,
+    "API Key": 33,
+    "Basic Auth": 6,
+    "API Token": 5,
+    "Bearer Token": 5,
+    "Personal Access Token": 5,
+    "Bot Token": 3,
+    "API Key + Secret": 3,
+    "None": 3,
+    "Access Token": 2,
+    "Webhooks": 2,
+    "Personal API Token": 2,
+    "JWT Bearer Flow": 1,
+    "PAT": 1,
+    "GraphQL token": 1,
+    "API Key + Email header": 1,
+    "App Access Token / Tenant Access Token": 1,
+    "JWT": 1,
+    "Admin API access token": 1,
+    "OAuth1.0a / Admin token": 1,
+    "Legacy static token": 1,
+    "Zone credentials": 1,
+    "GitHub App": 1,
+    "Basic Auth / Bearer": 1,
+    "Key-pair": 1,
+    "Digest Auth": 1,
+    "SCRAM/X.509 for database driver": 1,
+    "API Key + Application Key": 1,
+    "Internal Integration Token": 1,
+    "Personal API Key": 1,
+    "API Access Token": 1,
+    "API Key + HMAC signature": 1,
+    "Bearer Token / API Key": 1
+  },
+  "auth_distribution_chart": {
+    "OAuth2": 59,
+    "API Key": 33,
+    "Basic Auth": 6,
+    "API Token": 5,
+    "Bearer Token": 5,
+    "Personal Access Token": 5,
+    "Bot Token": 3,
+    "Other (26 variants)": 33
+  },
+  "oauth_vs_key_pct": {
+    "oauth_pct": 60.0,
+    "key_or_token_pct": 69.0
+  },
+  "self_serve_counts": {
+    "freemium_signup": 43,
+    "open": 33,
+    "admin_approval_required": 8,
+    "paid_plan_required": 7,
+    "contact_sales_only": 4,
+    "gated_unclear": 3,
+    "partnership_required": 2
+  },
+  "self_serve_open_pct": 76.0,
+  "gated_pct": 24.0,
+  "self_serve_by_category": [
+    {
+      "category": "Developer & Infra",
+      "total": 10,
+      "self_serve": 10,
+      "self_serve_pct": 100.0
+    },
+    {
+      "category": "Productivity & PM",
+      "total": 10,
+      "self_serve": 10,
+      "self_serve_pct": 100.0
+    },
+    {
+      "category": "CRM & Sales",
+      "total": 10,
+      "self_serve": 9,
+      "self_serve_pct": 90.0
+    },
+    {
+      "category": "Communications & Messaging",
+      "total": 10,
+      "self_serve": 8,
+      "self_serve_pct": 80.0
+    },
+    {
+      "category": "Ecommerce",
+      "total": 10,
+      "self_serve": 8,
+      "self_serve_pct": 80.0
+    },
+    {
+      "category": "Support & Helpdesk",
+      "total": 10,
+      "self_serve": 8,
+      "self_serve_pct": 80.0
+    },
+    {
+      "category": "Data, SEO & Scraping",
+      "total": 10,
+      "self_serve": 7,
+      "self_serve_pct": 70.0
+    },
+    {
+      "category": "Finance & Fintech",
+      "total": 10,
+      "self_serve": 6,
+      "self_serve_pct": 60.0
+    },
+    {
+      "category": "Marketing, Ads & Social",
+      "total": 10,
+      "self_serve": 6,
+      "self_serve_pct": 60.0
+    },
+    {
+      "category": "AI, Research & Media",
+      "total": 10,
+      "self_serve": 4,
+      "self_serve_pct": 40.0
+    }
+  ],
+  "most_self_serve_category": "Developer & Infra",
+  "most_gated_category": "AI, Research & Media",
+  "breadth_by_category": {
+    "Developer & Infra": 2.0,
+    "Productivity & PM": 1.8,
+    "Ecommerce": 1.6,
+    "Marketing, Ads & Social": 1.6,
+    "Communications & Messaging": 1.5,
+    "Support & Helpdesk": 1.4,
+    "CRM & Sales": 1.2,
+    "Finance & Fintech": 1.2,
+    "Data, SEO & Scraping": 1.1,
+    "AI, Research & Media": 0.5
+  },
+  "top_blockers": {
+    "Other / product-specific": 6,
+    "Enterprise-only / contact sales": 6,
+    "Manual app/developer review required": 6,
+    "No free tier for API access": 5,
+    "Partner/reseller gate": 2,
+    "No public API documentation found": 2
+  },
+  "mcp_official_count": 34,
+  "mcp_community_count": 29,
+  "mcp_none_count": 37,
+  "mcp_official_pct": 34.0,
+  "mcp_any_pct": 63.0,
+  "mcp_none_pct": 37.0,
+  "buildability_counts": {
+    "Easy": 73,
+    "Medium": 19,
+    "Hard": 7,
+    "Impossible": 1
+  },
+  "docs_public_pct": 95.0,
+  "avg_confidence": 83.6,
+  "verification_counts": {
+    "agent_verified": 84,
+    "flagged": 11,
+    "human_verified": 5
+  },
+  "top_priority_targets": [
+    {
+      "name": "Telegram",
+      "category": "Communications & Messaging",
+      "buildability": "Easy",
+      "self_serve": "open",
+      "confidence": 97,
+      "priority_score": 100
+    },
+    {
+      "name": "Salesforce",
+      "category": "CRM & Sales",
+      "buildability": "Easy",
+      "self_serve": "freemium_signup",
+      "confidence": 95,
+      "priority_score": 100
+    },
+    {
+      "name": "Discord",
+      "category": "Communications & Messaging",
+      "buildability": "Easy",
+      "self_serve": "open",
+      "confidence": 95,
+      "priority_score": 100
+    },
+    {
+      "name": "Mailchimp",
+      "category": "Marketing, Ads & Social",
+      "buildability": "Easy",
+      "self_serve": "freemium_signup",
+      "confidence": 93,
+      "priority_score": 100
+    },
+    {
+      "name": "WooCommerce",
+      "category": "Ecommerce",
+      "buildability": "Easy",
+      "self_serve": "open",
+      "confidence": 92,
+      "priority_score": 100
+    },
+    {
+      "name": "Freshdesk",
+      "category": "Support & Helpdesk",
+      "buildability": "Easy",
+      "self_serve": "freemium_signup",
+      "confidence": 90,
+      "priority_score": 100
+    },
+    {
+      "name": "Vonage",
+      "category": "Communications & Messaging",
+      "buildability": "Easy",
+      "self_serve": "open",
+      "confidence": 90,
+      "priority_score": 100
+    },
+    {
+      "name": "SendGrid",
+      "category": "Marketing, Ads & Social",
+      "buildability": "Easy",
+      "self_serve": "freemium_signup",
+      "confidence": 90,
+      "priority_score": 100
+    },
+    {
+      "name": "BigCommerce",
+      "category": "Ecommerce",
+      "buildability": "Easy",
+      "self_serve": "freemium_signup",
+      "confidence": 90,
+      "priority_score": 100
+    },
+    {
+      "name": "Netlify",
+      "category": "Developer & Infra",
+      "buildability": "Easy",
+      "self_serve": "open",
+      "confidence": 90,
+      "priority_score": 100
+    }
+  ],
+  "auth_effort_counts": {
+    "Higher (OAuth2 app registration + consent flow + token refresh)": 59,
+    "Low (static API key / token / Bearer credential)": 36,
+    "N/A (no auth / local tool)": 3,
+    "Medium (signed-request or JWT auth, no consent flow)": 2
+  },
+  "auth_effort_by_category_oauth_pct": {
+    "Productivity & PM": 90.0,
+    "CRM & Sales": 80.0,
+    "Marketing, Ads & Social": 80.0,
+    "Developer & Infra": 70.0,
+    "Ecommerce": 70.0,
+    "Communications & Messaging": 60.0,
+    "Finance & Fintech": 60.0,
+    "Support & Helpdesk": 50.0,
+    "AI, Research & Media": 20.0,
+    "Data, SEO & Scraping": 10.0
+  },
+  "category_recommendation": {
+    "CRM & Sales": {
+      "self_serve_pct": 90.0,
+      "mcp_coverage_pct": 60.0,
+      "recommendation": "Mature category: mostly self-serve, MCP coverage already forming -- differentiate on depth/reliability, not just access."
+    },
+    "Support & Helpdesk": {
+      "self_serve_pct": 80.0,
+      "mcp_coverage_pct": 40.0,
+      "recommendation": "Prioritize now: highly self-serve, MCP coverage still low -- clear whitespace."
+    },
+    "Communications & Messaging": {
+      "self_serve_pct": 80.0,
+      "mcp_coverage_pct": 70.0,
+      "recommendation": "Mature category: mostly self-serve, MCP coverage already forming -- differentiate on depth/reliability, not just access."
+    },
+    "Marketing, Ads & Social": {
+      "self_serve_pct": 60.0,
+      "mcp_coverage_pct": 60.0,
+      "recommendation": "Mixed: triage app-by-app rather than treating the category uniformly."
+    },
+    "Ecommerce": {
+      "self_serve_pct": 80.0,
+      "mcp_coverage_pct": 40.0,
+      "recommendation": "Prioritize now: highly self-serve, MCP coverage still low -- clear whitespace."
+    },
+    "Data, SEO & Scraping": {
+      "self_serve_pct": 70.0,
+      "mcp_coverage_pct": 60.0,
+      "recommendation": "Mixed: triage app-by-app rather than treating the category uniformly."
+    },
+    "Developer & Infra": {
+      "self_serve_pct": 100.0,
+      "mcp_coverage_pct": 100.0,
+      "recommendation": "Mature category: mostly self-serve, MCP coverage already forming -- differentiate on depth/reliability, not just access."
+    },
+    "Productivity & PM": {
+      "self_serve_pct": 100.0,
+      "mcp_coverage_pct": 90.0,
+      "recommendation": "Mature category: mostly self-serve, MCP coverage already forming -- differentiate on depth/reliability, not just access."
+    },
+    "Finance & Fintech": {
+      "self_serve_pct": 60.0,
+      "mcp_coverage_pct": 60.0,
+      "recommendation": "Mixed: triage app-by-app rather than treating the category uniformly."
+    },
+    "AI, Research & Media": {
+      "self_serve_pct": 40.0,
+      "mcp_coverage_pct": 50.0,
+      "recommendation": "Requires BD motion: majority gated behind admin/partner/sales approval -- budget outreach time, not just engineering time."
+    }
+  },
+  "composio_crosscheck": {
+    "already": 47,
+    "not_yet": 53,
+    "not_checked": 0,
+    "lookup_failed": 0,
+    "auth_agreement_checked": 23,
+    "auth_agreements": 22,
+    "ran_live": true
+  },
+  "opportunities": {
+    "easy_wins": [
+      "Salesforce",
+      "Pipedrive",
+      "Twenty",
+      "Zoho CRM",
+      "Close",
+      "Copper",
+      "Freshdesk",
+      "Front",
+      "LiveAgent",
+      "Plain",
+      "Help Scout",
+      "Gorgias",
+      "Zoho Cliq",
+      "Lark (Larksuite)",
+      "Discord",
+      "Telegram",
+      "Aircall",
+      "Vonage",
+      "GoHighLevel",
+      "Mailchimp",
+      "systeme.io",
+      "Pinterest",
+      "SendGrid",
+      "WooCommerce",
+      "BigCommerce",
+      "Magento (Adobe Commerce)",
+      "Squarespace",
+      "Ecwid",
+      "Gumroad",
+      "fanbasis",
+      "MrScraper",
+      "Clay",
+      "Netlify",
+      "Coda",
+      "Smartsheet",
+      "Harvest",
+      "Binance",
+      "QuickBooks",
+      "Xero",
+      "Reducto",
+      "Mermaid CLI",
+      "YouTube Transcript API (transcriptapi.com)"
+    ],
+    "needs_outreach": [
+      "Pylon",
+      "WhatsApp Business",
+      "Google Ads",
+      "Meta Ads",
+      "LinkedIn Ads",
+      "Threads (Meta)",
+      "Amazon Selling Partner API",
+      "Waterfall.io",
+      "Brex",
+      "Ramp"
+    ],
+    "enterprise_only": [
+      "DealCloud",
+      "Salesforce Commerce Cloud",
+      "PitchBook",
+      "NotebookLM"
+    ],
+    "missing_or_hard_apis": [
+      "DealCloud",
+      "Pumble",
+      "LinkedIn Ads",
+      "Salesforce Commerce Cloud",
+      "Paygent Connect",
+      "PitchBook",
+      "NotebookLM",
+      "higgsfield"
+    ]
+  }
+}

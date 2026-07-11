@@ -1,0 +1,19 @@
+# Core pipeline (works offline, no key required -- uses pipeline/seed_dataset.py)
+pandas>=2.1
+jinja2>=3.1
+requests>=2.31       # needed for pipeline/composio_client.py LIVE mode
+python-dotenv>=1.0   # auto-loads .env so a real key "just works" without manual export
+
+# LIVE research mode (optional -- only needed to re-run research_agent.py
+# against the real web with an OpenAI key instead of the offline seed data)
+openai>=1.30
+pydantic>=2.5          # drop-in structured-output schema, see models.py bottom comment
+
+# LIVE Composio catalog cross-check (optional -- only needed to re-run
+# scripts/run_composio_crosscheck.py against the real Composio API)
+composio>=1.0           # pip install composio; see pipeline/composio_client.py
+
+# Optional: swap in for deeper doc extraction than the model's built-in
+# web_search tool (JS-rendered docs, PDF spec sheets, login-walled portals)
+# firecrawl-py>=1.0
+# beautifulsoup4>=4.12

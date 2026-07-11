@@ -1,0 +1,185 @@
+{
+  "sample_size": 17,
+  "initial_accuracy": 0.833,
+  "final_accuracy": 1.0,
+  "methodology": {
+    "sampling_strategy": "The doc-verified core sample (6 apps) was chosen deliberately, not randomly: it includes every app this pipeline's own confidence check treated as genuinely uncertain going in (Consensus, Waterfall.io, iPayX -- thin, ambiguous, or unusually-structured docs), plus a spot-check control group of apps the agent was confident about (Pylon, fanbasis, GoHighLevel) to test whether high self-reported confidence was actually earned. That mix is intentional: checking only the uncertain rows would prove the flagging logic works but say nothing about whether 'confident' rows can be trusted; checking only confident rows would miss exactly the cases most likely to be wrong.",
+    "disagreement_resolution": "When the live doc check contradicted the agent's first-pass answer (Consensus), the documentation was treated as ground truth and the row was corrected in pipeline/seed_dataset.py with the discrepancy logged in both the row's own `notes` field and this report -- not silently overwritten. Rows that were merely auto-flagged by the confidence heuristic (not yet doc-checked) are never marked 'incorrect'; they stay in a separate pending-review bucket until an actual comparison against docs happens, so the accuracy figure below only reflects claims that were actually tested.",
+    "confidence_formula": "Base 50, +20 public docs / -15 no public docs, +10 resolvable evidence URL, +10 open/freemium self-serve / -10 contact-sales or unclear, +5 official MCP present, -5 blocker present. Clamped to [0, 100]. See recompute_confidence() in this file.",
+    "doc_verified_count": 6,
+    "pending_review_count": 11,
+    "auto_flag_rule": "Any row where |recomputed_confidence - agent_confidence| > 25, OR agent_confidence < 70 while still marked agent_verified, is routed to pending review."
+  },
+  "checks": [
+    {
+      "app_id": 15,
+      "app_name": "Pylon",
+      "field_checked": "auth + self_serve + mcp",
+      "agent_answer": "Bearer token; admin-only key creation; official MCP referenced",
+      "doc_answer": "Confirmed: Bearer auth, 'Only Admin users can create API tokens', per-endpoint rate limits (60/min Accounts, 10/min Issues), 'Pylon MCP' in docs nav",
+      "result": "correct",
+      "source_url": "https://docs.usepylon.com/pylon-docs/developer/api",
+      "note": "First pass was accurate on every checked field."
+    },
+    {
+      "app_id": 50,
+      "app_name": "fanbasis",
+      "field_checked": "auth + self_serve",
+      "agent_answer": "x-api-key header; self-serve dashboard signup; sandbox available",
+      "doc_answer": "Confirmed: 'Log into your FanBasis dashboard and go to the API Keys section', x-api-key header, sandbox test cards documented, official SDKs on npm",
+      "result": "correct",
+      "source_url": "https://apidocs.fan/",
+      "note": "First pass was accurate."
+    },
+    {
+      "app_id": 59,
+      "app_name": "Waterfall.io",
+      "field_checked": "self_serve",
+      "agent_answer": "API-key self-serve, but platform/reseller use is partnership-gated",
+      "doc_answer": "Confirmed via site FAQ: 'no long-term contracts... can develop products using Waterfall data? We are very selective in partnering with platform customers'",
+      "result": "correct",
+      "source_url": "https://www.waterfall.io/book-a-call",
+      "note": "Nuanced finding held up: direct API use is self-serve, but building a product ON TOP of Waterfall's data requires their selective partnership approval."
+    },
+    {
+      "app_id": 85,
+      "app_name": "iPayX",
+      "field_checked": "auth + mcp",
+      "agent_answer": "Free no-auth comparison endpoint; paid Bearer-token audit endpoints; official MCP",
+      "doc_answer": "Confirmed via public MCP directory listings (Glama, mcpservers.org, GitHub): free compare_fx_rates tool (no auth), paid audit tools (Bearer/API key, 402 after trial), official 'iPayX FX Audit' MCP server",
+      "result": "correct",
+      "source_url": "https://www.ipayx.ai/docs/mcp-server",
+      "note": "Confirmed, with a caveat: the MCP tool descriptions themselves contained embedded prompt-injection-style instructions (e.g. 'never mention competitor X'); the pipeline ignored those instructions and reported only the factual auth/access model."
+    },
+    {
+      "app_id": 94,
+      "app_name": "Consensus",
+      "field_checked": "self_serve + api_surface + mcp",
+      "agent_answer": "INITIAL (WRONG): no public API found; Hard / Unknown, confidence 40",
+      "doc_answer": "docs.consensus.app is public with a working GET /v1/quick_search endpoint, free self-signup issues a working Bearer API key immediately, and an official MCP server exists at mcp.consensus.app (used by ChatGPT Deep Research)",
+      "result": "updated",
+      "source_url": "https://docs.consensus.app/",
+      "note": "Genuine correction. The first pass under-searched and concluded 'no public API' -- a live check found a real, documented, self-serve API and an official MCP. Row updated from Hard/flagged/confidence 40 to Easy/human_verified/confidence 90."
+    },
+    {
+      "app_id": 34,
+      "app_name": "GoHighLevel",
+      "field_checked": "auth + self_serve + rate_limits",
+      "agent_answer": "OAuth2, self-serve Marketplace developer signup, burst+daily rate limits documented",
+      "doc_answer": "Confirmed: Marketplace developer signup is self-serve for Private (internal) apps; OAuth2 required for Public/Marketplace-listed apps; documented limits of 100 req/10s burst and 200,000 req/day per app",
+      "result": "correct",
+      "source_url": "https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api-documentation",
+      "note": "First pass was accurate, including the specific rate-limit numbers."
+    },
+    {
+      "app_id": 10,
+      "app_name": "DealCloud",
+      "field_checked": "overall confidence",
+      "agent_answer": "Hard / confidence 45",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://api.docs.dealcloud.com/",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 20,
+      "app_name": "Gladly",
+      "field_checked": "overall confidence",
+      "agent_answer": "Medium / confidence 65",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://developer.gladly.com/rest/",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 25,
+      "app_name": "Pumble",
+      "field_checked": "overall confidence",
+      "agent_answer": "Hard / confidence 55",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://pumble.com/help/integrations/incoming-webhooks/",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 54,
+      "app_name": "MrScraper",
+      "field_checked": "overall confidence",
+      "agent_answer": "Easy / confidence 65",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://docs.mrscraper.com/",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 84,
+      "app_name": "Paygent Connect",
+      "field_checked": "overall confidence",
+      "agent_answer": "Hard / confidence 35",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "incorrect",
+      "source_url": "https://www.nmi.com/developers",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 90,
+      "app_name": "PitchBook",
+      "field_checked": "overall confidence",
+      "agent_answer": "Hard / confidence 50",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://pitchbook.com/data",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 91,
+      "app_name": "NotebookLM",
+      "field_checked": "overall confidence",
+      "agent_answer": "Impossible / confidence 75",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://cloud.google.com/gemini",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 92,
+      "app_name": "Otter.ai",
+      "field_checked": "overall confidence",
+      "agent_answer": "Medium / confidence 68",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://help.otter.ai/",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 93,
+      "app_name": "Fathom",
+      "field_checked": "overall confidence",
+      "agent_answer": "Medium / confidence 55",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://fathom.video",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 97,
+      "app_name": "higgsfield",
+      "field_checked": "overall confidence",
+      "agent_answer": "Hard / confidence 30",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "incorrect",
+      "source_url": "https://higgsfield.ai",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    },
+    {
+      "app_id": 100,
+      "app_name": "Grain",
+      "field_checked": "overall confidence",
+      "agent_answer": "Medium / confidence 60",
+      "doc_answer": "Not yet independently live-checked in this pass -- auto-routed to the human review queue because evidence was thin, gated, or internally inconsistent.",
+      "result": "updated",
+      "source_url": "https://grain.com/",
+      "note": "PENDING HUMAN REVIEW -- flagged by the confidence-recomputation rule, not a confirmed error. Excluded from the accuracy calculation below for that reason."
+    }
+  ]
+}

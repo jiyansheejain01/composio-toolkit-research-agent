@@ -1,0 +1,948 @@
+[
+  {
+    "app_id": 1,
+    "app_name": "Salesforce",
+    "guessed_slug": "salesforce",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 2,
+    "app_name": "HubSpot",
+    "guessed_slug": "hubspot",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 3,
+    "app_name": "Pipedrive",
+    "guessed_slug": "pipedrive",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 4,
+    "app_name": "Attio",
+    "guessed_slug": "attio",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 5,
+    "app_name": "Twenty",
+    "guessed_slug": "twenty",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 6,
+    "app_name": "Podio",
+    "guessed_slug": "podio",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 7,
+    "app_name": "Zoho CRM",
+    "guessed_slug": "zoho_crm",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 8,
+    "app_name": "Close",
+    "guessed_slug": "close",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 9,
+    "app_name": "Copper",
+    "guessed_slug": "copper",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 10,
+    "app_name": "DealCloud",
+    "guessed_slug": "dealcloud",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 11,
+    "app_name": "Zendesk",
+    "guessed_slug": "zendesk",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 12,
+    "app_name": "Intercom",
+    "guessed_slug": "intercom",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 13,
+    "app_name": "Freshdesk",
+    "guessed_slug": "freshdesk",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 14,
+    "app_name": "Front",
+    "guessed_slug": "front",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 15,
+    "app_name": "Pylon",
+    "guessed_slug": "pylon",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 16,
+    "app_name": "LiveAgent",
+    "guessed_slug": "liveagent",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 17,
+    "app_name": "Plain",
+    "guessed_slug": "plain",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 18,
+    "app_name": "Help Scout",
+    "guessed_slug": "help_scout",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 19,
+    "app_name": "Gorgias",
+    "guessed_slug": "gorgias",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 20,
+    "app_name": "Gladly",
+    "guessed_slug": "gladly",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 21,
+    "app_name": "Slack",
+    "guessed_slug": "slack",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 22,
+    "app_name": "Twilio",
+    "guessed_slug": "twilio",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 23,
+    "app_name": "Zoho Cliq",
+    "guessed_slug": "zoho_cliq",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 24,
+    "app_name": "Lark (Larksuite)",
+    "guessed_slug": "lark",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 25,
+    "app_name": "Pumble",
+    "guessed_slug": "pumble",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 26,
+    "app_name": "Discord",
+    "guessed_slug": "discord",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 27,
+    "app_name": "Telegram",
+    "guessed_slug": "telegram",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 28,
+    "app_name": "WhatsApp Business",
+    "guessed_slug": "whatsapp_business",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 29,
+    "app_name": "Aircall",
+    "guessed_slug": "aircall",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 30,
+    "app_name": "Vonage",
+    "guessed_slug": "vonage",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 31,
+    "app_name": "Google Ads",
+    "guessed_slug": "google_ads",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 32,
+    "app_name": "Meta Ads",
+    "guessed_slug": "meta_ads",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 33,
+    "app_name": "LinkedIn Ads",
+    "guessed_slug": "linkedin_ads",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 34,
+    "app_name": "GoHighLevel",
+    "guessed_slug": "gohighlevel",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 35,
+    "app_name": "Mailchimp",
+    "guessed_slug": "mailchimp",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 36,
+    "app_name": "Klaviyo",
+    "guessed_slug": "klaviyo",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 37,
+    "app_name": "systeme.io",
+    "guessed_slug": "systeme_io",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 38,
+    "app_name": "Pinterest",
+    "guessed_slug": "pinterest",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 39,
+    "app_name": "Threads (Meta)",
+    "guessed_slug": "threads",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 40,
+    "app_name": "SendGrid",
+    "guessed_slug": "sendgrid",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 41,
+    "app_name": "Shopify",
+    "guessed_slug": "shopify",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 42,
+    "app_name": "WooCommerce",
+    "guessed_slug": "woocommerce",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 43,
+    "app_name": "BigCommerce",
+    "guessed_slug": "bigcommerce",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 44,
+    "app_name": "Salesforce Commerce Cloud",
+    "guessed_slug": "salesforce_commerce_cloud",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 45,
+    "app_name": "Magento (Adobe Commerce)",
+    "guessed_slug": "magento",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 46,
+    "app_name": "Squarespace",
+    "guessed_slug": "squarespace",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 47,
+    "app_name": "Ecwid",
+    "guessed_slug": "ecwid",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 48,
+    "app_name": "Gumroad",
+    "guessed_slug": "gumroad",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 49,
+    "app_name": "Amazon Selling Partner API",
+    "guessed_slug": "amazon_selling_partner_api",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 50,
+    "app_name": "fanbasis",
+    "guessed_slug": "fanbasis",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 51,
+    "app_name": "DataForSEO",
+    "guessed_slug": "dataforseo",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 52,
+    "app_name": "SE Ranking",
+    "guessed_slug": "se_ranking",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 53,
+    "app_name": "Ahrefs",
+    "guessed_slug": "ahrefs",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 54,
+    "app_name": "MrScraper",
+    "guessed_slug": "mrscraper",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 55,
+    "app_name": "Apify",
+    "guessed_slug": "apify",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 56,
+    "app_name": "Firecrawl",
+    "guessed_slug": "firecrawl",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 57,
+    "app_name": "Bright Data",
+    "guessed_slug": "bright_data",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 58,
+    "app_name": "Sherlock",
+    "guessed_slug": "sherlock",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 59,
+    "app_name": "Waterfall.io",
+    "guessed_slug": "waterfall_io",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 60,
+    "app_name": "Clay",
+    "guessed_slug": "clay",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 61,
+    "app_name": "GitHub",
+    "guessed_slug": "github",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 62,
+    "app_name": "Vercel",
+    "guessed_slug": "vercel",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 63,
+    "app_name": "Netlify",
+    "guessed_slug": "netlify",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 64,
+    "app_name": "Cloudflare",
+    "guessed_slug": "cloudflare",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 65,
+    "app_name": "Supabase",
+    "guessed_slug": "supabase",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 66,
+    "app_name": "Neo4j",
+    "guessed_slug": "neo4j",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 67,
+    "app_name": "Snowflake",
+    "guessed_slug": "snowflake",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 68,
+    "app_name": "MongoDB Atlas",
+    "guessed_slug": "mongodb_atlas",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 69,
+    "app_name": "Datadog",
+    "guessed_slug": "datadog",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 70,
+    "app_name": "Sentry",
+    "guessed_slug": "sentry",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 71,
+    "app_name": "Notion",
+    "guessed_slug": "notion",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 72,
+    "app_name": "Airtable",
+    "guessed_slug": "airtable",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 73,
+    "app_name": "Linear",
+    "guessed_slug": "linear",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 74,
+    "app_name": "Jira",
+    "guessed_slug": "jira",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 75,
+    "app_name": "Asana",
+    "guessed_slug": "asana",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 76,
+    "app_name": "Monday.com",
+    "guessed_slug": "monday_com",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 77,
+    "app_name": "ClickUp",
+    "guessed_slug": "clickup",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 78,
+    "app_name": "Coda",
+    "guessed_slug": "coda",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 79,
+    "app_name": "Smartsheet",
+    "guessed_slug": "smartsheet",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 80,
+    "app_name": "Harvest",
+    "guessed_slug": "harvest",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 81,
+    "app_name": "Stripe",
+    "guessed_slug": "stripe",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 82,
+    "app_name": "Plaid",
+    "guessed_slug": "plaid",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 83,
+    "app_name": "Binance",
+    "guessed_slug": "binance",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 84,
+    "app_name": "Paygent Connect",
+    "guessed_slug": "paygent_connect",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 85,
+    "app_name": "iPayX",
+    "guessed_slug": "ipayx",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 86,
+    "app_name": "QuickBooks",
+    "guessed_slug": "quickbooks",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": true,
+    "note": ""
+  },
+  {
+    "app_id": 87,
+    "app_name": "Xero",
+    "guessed_slug": "xero",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 88,
+    "app_name": "Brex",
+    "guessed_slug": "brex",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 89,
+    "app_name": "Ramp",
+    "guessed_slug": "ramp",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 90,
+    "app_name": "PitchBook",
+    "guessed_slug": "pitchbook",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 91,
+    "app_name": "NotebookLM",
+    "guessed_slug": "notebooklm",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 92,
+    "app_name": "Otter.ai",
+    "guessed_slug": "otter_ai",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 93,
+    "app_name": "Fathom",
+    "guessed_slug": "fathom",
+    "composio_status": "ALREADY_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [
+      "OAUTH2"
+    ],
+    "agrees_with_our_finding": false,
+    "note": "Our auth finding did not match Composio's recorded scheme(s) -- worth a manual re-check."
+  },
+  {
+    "app_id": 94,
+    "app_name": "Consensus",
+    "guessed_slug": "consensus",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 95,
+    "app_name": "Reducto",
+    "guessed_slug": "reducto",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 96,
+    "app_name": "Devin",
+    "guessed_slug": "devin",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 97,
+    "app_name": "higgsfield",
+    "guessed_slug": "higgsfield",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 98,
+    "app_name": "Mermaid CLI",
+    "guessed_slug": "mermaid_cli",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 99,
+    "app_name": "YouTube Transcript API (transcriptapi.com)",
+    "guessed_slug": "youtube_transcript_api",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  },
+  {
+    "app_id": 100,
+    "app_name": "Grain",
+    "guessed_slug": "grain",
+    "composio_status": "NOT_YET_A_COMPOSIO_TOOLKIT",
+    "composio_auth_schemes": [],
+    "agrees_with_our_finding": null,
+    "note": "404 from Composio -- either not yet integrated, or the slug guess was wrong (TODO: fall back to GET /toolkits?search= before concluding absence)."
+  }
+]

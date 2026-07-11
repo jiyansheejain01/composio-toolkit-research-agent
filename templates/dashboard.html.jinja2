@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Composio Integration Readiness Report — 100 SaaS Applications</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#0A0E17', surface: '#111827', surface2: '#161F33', line: '#232D42',
+          ink: '#E7ECF6', muted: '#8993AC', teal: '#4FD1C5', indigo: '#7C87F8',
+          good: '#34D399', warn: '#FBBF24', bad: '#FB7185',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #0A0E17; }
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(124,135,248,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,135,248,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .glow-text {
+    background: linear-gradient(135deg, #4FD1C5, #7C87F8);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .card { background: #111827; border: 1px solid #232D42; border-radius: 0.75rem; }
+  .card-hover:hover { border-color: #4FD1C5; transition: border-color 0.2s ease; }
+  .section { padding-top: 4rem; padding-bottom: 4rem; }
+  .section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .flow-line { stroke-dasharray: 6 6; animation: dash 20s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -400; } }
+  @media (prefers-reduced-motion: reduce) { .flow-line { animation: none; } }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0A0E17; }
+  ::-webkit-scrollbar-thumb { background: #232D42; border-radius: 6px; }
+  .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.02em; border-radius: 0.375rem; padding: 0.15rem 0.5rem; border-width: 1px; }
+  a.evidence-link { font-family: 'JetBrains Mono', monospace; }
+  .table-row-expand { display: none; }
+  .table-row-expand.open { display: table-row; }
+  input:focus, select:focus { outline: none; box-shadow: 0 0 0 2px #4FD1C5; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: #E7ECF6; }
+  th.sortable .arrow { opacity: 0.35; margin-left: 2px; }
+  th.sortable.active .arrow { opacity: 1; color: #4FD1C5; }
+</style>
+</head>
+<body class="font-body text-ink antialiased">
+
+<!-- ============ STICKY NAV ============ -->
+<nav class="sticky top-0 z-50 backdrop-blur bg-bg/85 border-b border-line">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between overflow-x-auto">
+    <div class="flex items-center gap-2 shrink-0">
+      <div class="w-2.5 h-2.5 rounded-sm" style="background:linear-gradient(135deg,#4FD1C5,#7C87F8)"></div>
+      <span class="font-display font-semibold tracking-tight whitespace-nowrap">Composio Integration Readiness Report</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-5 text-sm text-muted shrink-0">
+      <a href="#exec-summary" class="hover:text-ink">Summary</a>
+      <a href="#findings" class="hover:text-ink">Findings</a>
+      <a href="#recommendations" class="hover:text-ink">Recommendations</a>
+      <a href="#architecture" class="hover:text-ink">Architecture</a>
+      <a href="#verification" class="hover:text-ink">Trust Model</a>
+      <a href="#dataset" class="hover:text-ink">Dataset</a>
+      <a href="#patterns" class="hover:text-ink">Patterns</a>
+      <a href="#business" class="hover:text-ink">Business</a>
+      <a href="#repo" class="hover:text-ink">Repo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO — EXECUTIVE SUMMARY AT A GLANCE ============ -->
+<header class="relative bg-grid border-b border-line overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 pt-14 pb-10 relative z-10">
+    <p class="section-eyebrow text-teal mb-4">AI Product Ops · Internal Research Report · Composio Take-Home</p>
+    <h1 class="font-display text-3xl md:text-5xl font-semibold leading-[1.1] max-w-4xl">
+      Should Composio build a toolkit for this app? <span class="glow-text">An agent pipeline answered that for 100 of them.</span>
+    </h1>
+    <p class="mt-5 max-w-3xl text-base md:text-lg text-muted leading-relaxed">
+      Auth model, self-serve access, API surface, MCP status, and a buildability verdict — for 100 SaaS apps,
+      produced by a five-stage agent pipeline, cross-checked against Composio's own toolkit catalog, and
+      verified live against official docs where it mattered most. One of the agent's own findings was wrong;
+      that correction is on this page, not edited out.
+    </p>
+
+    <div class="mt-9 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl">
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold">100</div>
+        <div class="text-xs text-muted mt-1">Applications researched</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold">100</div>
+        <div class="text-xs text-muted mt-1">Structured, evidence-cited profiles</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold text-good">{{ insights.buildability_counts.get('Easy', 0) }}</div>
+        <div class="text-xs text-muted mt-1">Easy-build toolkit candidates</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold text-teal">{{ insights.mcp_any_pct }}%</div>
+        <div class="text-xs text-muted mt-1">Already have some MCP coverage</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold text-indigo">6</div>
+        <div class="text-xs text-muted mt-1">Apps verified against live docs</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold"><span class="text-warn">{{ (verification.initial_accuracy*100)|round(0)|int }}%</span> → <span class="text-good">{{ (verification.final_accuracy*100)|round(0)|int }}%</span></div>
+        <div class="text-xs text-muted mt-1">Initial → final verified accuracy</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold text-warn">{{ insights.opportunities.needs_outreach | length }}</div>
+        <div class="text-xs text-muted mt-1">Partner-gated opportunities found</div>
+      </div>
+      <div class="card p-4">
+        <div class="font-display text-2xl md:text-3xl font-semibold">{{ insights.verification_counts.get('flagged', 0) }}</div>
+        <div class="text-xs text-muted mt-1">Rows flagged for human review</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ EXECUTIVE SUMMARY ============ -->
+<section id="exec-summary" class="section border-b border-line">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-baseline justify-between mb-8">
+      <h2 class="font-display text-2xl md:text-3xl font-semibold">Executive summary</h2>
+      <span class="section-eyebrow text-muted hidden sm:block">2-minute read</span>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-teal text-sm mb-2">What was built &amp; why</h3>
+        <p class="text-sm text-muted leading-relaxed">Composio decides, app by app, whether a SaaS product can become an agent
+          toolkit today. This project runs that exact evaluation across 100 apps with an agent pipeline instead of a
+          spreadsheet: auth model, access gate, API surface, MCP status, buildability verdict — every claim traceable
+          to an official source.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-indigo text-sm mb-2">How it works &amp; why it can be trusted</h3>
+        <p class="text-sm text-muted leading-relaxed">Five specialized stages — plan, research, verify, analyze, report —
+          each with a defined input, output, and failure-handling behavior (see <a href="#architecture" class="text-teal underline">Architecture</a>).
+          Trust comes from showing the work: which apps were live doc-checked, which were only flagged, and one real
+          mistake the loop caught and fixed (see <a href="#verification" class="text-teal underline">Trust Model</a>).</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-good text-sm mb-2">Fit with Composio's own platform</h3>
+        <p class="text-sm text-muted leading-relaxed">A dedicated stage cross-checks every app against Composio's live
+          toolkit catalog (<code class="font-mono text-xs bg-surface2 px-1 rounded">GET /api/v3/toolkits/&#123;slug&#125;</code>) —
+          real SDK-shaped code, not a mention. It replaces guesswork with Composio's own ground truth wherever an app is
+          already integrated (see <a href="#recommendations" class="text-teal underline">Recommendations</a>).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEY FINDINGS ============ -->
+<section id="findings" class="section border-b border-line">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Key findings</h2>
+    <p class="text-sm text-muted mb-8 max-w-2xl">The numbers a Composio reviewer would want before reading anything else.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold">{{ insights.buildability_counts.get('Easy', 0) }}</div>
+        <div class="text-sm text-muted">Easy buildability</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold text-warn">{{ insights.buildability_counts.get('Medium', 0) }}</div>
+        <div class="text-sm text-muted">Medium buildability</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold text-bad">{{ insights.buildability_counts.get('Hard', 0) + insights.buildability_counts.get('Impossible', 0) }}</div>
+        <div class="text-sm text-muted">Hard / Impossible</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold text-teal">{{ insights.docs_public_pct }}%</div>
+        <div class="text-sm text-muted">Have public documentation</div>
+      </div>
+    </div>
+
+    <div class="card p-6">
+      <h3 class="font-display font-semibold text-sm mb-3">The headline, stated plainly</h3>
+      <p class="text-sm text-muted leading-relaxed">
+        <span class="text-teal font-semibold">{{ insights.oauth_vs_key_pct.oauth_pct }}%</span> of researched apps support OAuth2 and
+        <span class="text-indigo font-semibold">{{ insights.mcp_any_pct }}%</span> already have some kind of MCP server —
+        but <span class="text-warn font-semibold">{{ insights.most_gated_category }}</span> is the least self-serve
+        category Composio will encounter
+        ({{ (insights.self_serve_by_category | selectattr('category','equalto', insights.most_gated_category) | list)[0].self_serve_pct }}% self-serve),
+        while <span class="text-good font-semibold">{{ insights.most_self_serve_category }}</span> is fully open. The single
+        most common blocker across all 100 apps is
+        <span class="text-ink font-semibold">{{ (insights.top_blockers.keys() | list)[0] if insights.top_blockers else "n/a" }}</span> —
+        see <a href="#recommendations" class="text-teal underline">Strategic Recommendations</a> for what that implies for build order.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STRATEGIC RECOMMENDATIONS FOR COMPOSIO ============ -->
+<section id="recommendations" class="section border-b border-line bg-surface/40">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Strategic recommendations for Composio</h2>
+    <p class="text-sm text-muted mb-8 max-w-2xl">Every recommendation below answers one question: how should this change what Composio builds next?</p>
+
+    <div class="card p-6 mb-6">
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+        <h3 class="font-display font-semibold">Composio integration opportunities <span class="text-muted font-normal text-sm">— cross-checked against Composio's own catalog</span></h3>
+      </div>
+      {% if insights.composio_crosscheck.ran_live %}
+      <div class="grid sm:grid-cols-3 gap-4 mt-4">
+        <div><div class="text-2xl font-display font-semibold text-good">{{ insights.composio_crosscheck.already }}</div><div class="text-xs text-muted">Already a Composio toolkit</div></div>
+        <div><div class="text-2xl font-display font-semibold text-teal">{{ insights.composio_crosscheck.not_yet }}</div><div class="text-xs text-muted">Confirmed integration opportunity</div></div>
+        <div><div class="text-2xl font-display font-semibold text-indigo">{{ insights.composio_crosscheck.auth_agreements }}/{{ insights.composio_crosscheck.auth_agreement_checked }}</div><div class="text-xs text-muted">Our auth finding agreed with Composio's own record</div></div>
+      </div>
+      {% else %}
+      <p class="text-sm text-muted leading-relaxed mt-2">
+        <span class="text-warn font-medium">Not run live in this build ({{ insights.composio_crosscheck.not_checked }}/100 rows marked "not checked").</span>
+        This run executed with no <code class="font-mono text-xs bg-surface2 px-1 rounded">COMPOSIO_API_KEY</code> / network
+        available (this build's sandbox), so <code class="font-mono text-xs bg-surface2 px-1 rounded">pipeline/composio_client.py</code>
+        wrote <code class="font-mono text-xs bg-surface2 px-1 rounded">NOT_CHECKED_OFFLINE_MODE</code> for all 100 rows rather than
+        guessing which apps Composio has already integrated -- the 0s above are an honest "not checked," not a finding of zero overlap.
+        The code is real and calls the verified
+        <code class="font-mono text-xs bg-surface2 px-1 rounded">GET /api/v3/toolkits/&#123;slug&#125;</code> endpoint — running
+        <code class="font-mono text-xs bg-surface2 px-1 rounded">scripts/run_composio_crosscheck.py</code> with a real key populates
+        this section with Composio's actual catalog status and its own recorded auth scheme for every app, flagging any
+        disagreement with this pipeline's independent finding automatically.
+      </p>
+      {% endif %}
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-good text-sm mb-2">High-priority toolkit opportunities</h3>
+        <p class="text-xs text-muted mb-3">Self-serve, Easy buildability, no MCP shipped yet — the highest-leverage next builds.</p>
+        <div class="flex flex-wrap gap-1.5">
+          {% for name in insights.opportunities.easy_wins[:14] %}
+          <span class="badge bg-good/10 text-good border-good/30">{{ name }}</span>
+          {% endfor %}
+          {% if insights.opportunities.easy_wins | length > 14 %}
+          <span class="badge text-muted border-line">+{{ insights.opportunities.easy_wins | length - 14 }} more</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-warn text-sm mb-2">Partner-gated integration opportunities</h3>
+        <p class="text-xs text-muted mb-3">Not enterprise-only, but require admin or partner approval — budget BD time alongside engineering time.</p>
+        <div class="flex flex-wrap gap-1.5">
+          {% for name in insights.opportunities.needs_outreach %}
+          <span class="badge bg-warn/10 text-warn border-warn/30">{{ name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-bad text-sm mb-2">Enterprise-only, contact-sales gate</h3>
+        <p class="text-xs text-muted mb-3">No public self-serve path at any tier — access is sold through a sales cycle.</p>
+        <div class="flex flex-wrap gap-1.5">
+          {% for name in insights.opportunities.enterprise_only %}
+          <span class="badge bg-bad/10 text-bad border-bad/30">{{ name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display font-semibold text-sm mb-2">Missing or hard APIs</h3>
+        <p class="text-xs text-muted mb-3">Defeated a straightforward toolkit build — for real, documented reasons, not a research shortfall.</p>
+        <div class="flex flex-wrap gap-1.5">
+          {% for name in insights.opportunities.missing_or_hard_apis %}
+          <span class="badge bg-surface2 text-muted border-line">{{ name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-6 mt-6">
+      <h3 class="font-display font-semibold mb-1">Category-level playbook</h3>
+      <p class="text-xs text-muted mb-4 max-w-2xl leading-relaxed">Should Composio treat a whole category as one motion, or triage app-by-app? Derived from self-serve rate + existing MCP coverage.</p>
+      <div class="grid md:grid-cols-2 gap-3">
+        {% for cat, rec in insights.category_recommendation.items() %}
+        <div class="border border-line rounded-lg p-4">
+          <div class="flex items-center justify-between mb-1 gap-2">
+            <span class="font-display font-semibold text-sm">{{ cat }}</span>
+            <span class="text-xs text-muted font-mono whitespace-nowrap">{{ rec.self_serve_pct }}% SS · {{ rec.mcp_coverage_pct }}% MCP</span>
+          </div>
+          <p class="text-xs text-muted leading-relaxed">{{ rec.recommendation }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESEARCH AGENT ARCHITECTURE ============ -->
+<section id="architecture" class="section border-b border-line">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Research agent architecture</h2>
+    <p class="text-sm text-muted mb-8 max-w-2xl">Eight specialized responsibilities, not one script that does everything. Each has a defined input, output, and failure-handling behavior.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {% set agents = [
+        ("Planner Agent", "planner.py", "Decides HOW each app should be researched before any doc is read: source priority, scrutiny level, minimum search count.", "App name + category", "ResearchTask (strategy)", "Deterministic rules — no failure mode to retry."),
+        ("Research Agent", "research_agent.py", "Owns the LLM call: turns a ResearchTask into a web-search-grounded question for the model.", "ResearchTask", "Raw model response", "3 attempts, linear backoff (2s, 4s) via the shared pipeline/retry.py helper; a clean low-confidence answer is never retried, only actual failures are."),
+        ("Browser / Retrieval Agent", "OpenAI web_search tool (LIVE mode)", "Executes the actual searches and page reads the Planner prioritized (official docs, developer portal, help center, MCP registry).", "Search queries from source_priority", "Retrieved page content", "Model-managed; a 0-result search is reported back to the Research Agent, which can broaden the query."),
+        ("Extraction Agent", "research_agent.SYSTEM_PROMPT + structured output", "Pulls auth method, self-serve model, API surface, MCP status, and evidence URL out of retrieved content into JSON.", "Retrieved page content", "Unvalidated JSON payload", "Malformed JSON triggers the same retry loop as a network failure — extraction errors are treated as transient, not final."),
+        ("Normalization Agent", "models.py", "Forces the JSON payload into one strict schema (AppResearch) shared by every downstream stage.", "Unvalidated JSON", "AppResearch row", "Schema mismatch raises immediately — no silent coercion of a field into the wrong type."),
+        ("Verification Agent", "verification_agent.py", "Independently re-derives confidence from the row's own evidence signals; runs live doc cross-checks on a sample; routes disagreements to human review.", "AppResearch rows", "VerificationReport + corrected rows", "No retries needed — a disagreement is a valid finding, routed to the pending-review queue rather than silently resolved."),
+        ("Analytics Agent", "pattern_analysis.py", "Runs pandas aggregations, computes the Build-Priority Score, and cross-references the Composio catalog check.", "Verified AppResearch rows", "pattern_insights.json", "Missing composio_crosscheck.json degrades gracefully to zeroed counts, not a crash."),
+        ("Report Generator", "dashboard_generator.py", "Renders every upstream artifact into this single self-contained HTML page via Jinja2.", "apps.json + insights.json + verification.json", "output/dashboard.html", "Missing/partial data renders a visibly incomplete section rather than failing the whole build."),
+      ] %}
+      {% for name, module, resp, inp, outp, retry in agents %}
+      <div class="card card-hover p-5">
+        <div class="text-teal font-mono text-xs mb-2">{{ '%02d' | format(loop.index0) }}</div>
+        <h3 class="font-display font-semibold text-sm">{{ name }}</h3>
+        <p class="text-xs text-muted mt-1 mb-3 font-mono">{{ module }}</p>
+        <p class="text-xs text-muted leading-relaxed mb-3">{{ resp }}</p>
+        <div class="text-xs space-y-1 border-t border-line pt-2 mt-2">
+          <p class="text-muted"><span class="text-ink">In:</span> {{ inp }}</p>
+          <p class="text-muted"><span class="text-ink">Out:</span> {{ outp }}</p>
+          <p class="text-muted"><span class="text-ink">Failure handling:</span> {{ retry }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="mt-6 card p-6">
+      <h3 class="font-display font-semibold mb-3">Pipeline flow</h3>
+      <div class="overflow-x-auto">
+      <svg viewBox="0 0 1100 220" class="min-w-[700px] w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#4FD1C5"/>
+          </marker>
+          <linearGradient id="flowGrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#4FD1C5"/><stop offset="100%" stop-color="#7C87F8"/>
+          </linearGradient>
+        </defs>
+        {% set boxes = ["Planner\n(strategy)","Research + Browser\n(search & read)","Extraction\n(structured JSON)","Normalization\n(schema)","Composio Cross-Check\n(catalog)","Verification\n(confidence + sample)","Analytics\n(pandas)","Report Generator\n(this page)"] %}
+        {% for label in boxes %}
+        {% set col = loop.index0 % 4 %}
+        {% set row = (loop.index0 // 4) %}
+        {% set x = 20 + col * 270 %}
+        {% set y = 20 + row * 100 %}
+        <rect x="{{ x }}" y="{{ y }}" width="240" height="60" rx="8" fill="#161F33" stroke="#232D42"/>
+        {% for line in label.split("\n") %}
+        <text x="{{ x + 120 }}" y="{{ y + 26 + loop.index0 * 16 }}" text-anchor="middle" fill="#E7ECF6" font-family="Space Grotesk" font-size="12">{{ line }}</text>
+        {% endfor %}
+        {% endfor %}
+        <line x1="260" y1="50" x2="290" y2="50" stroke="url(#flowGrad2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="530" y1="50" x2="560" y2="50" stroke="url(#flowGrad2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="800" y1="50" x2="830" y2="50" stroke="url(#flowGrad2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="140" y1="80" x2="140" y2="120" stroke="#7C87F8" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="260" y1="150" x2="290" y2="150" stroke="url(#flowGrad2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="530" y1="150" x2="560" y2="150" stroke="url(#flowGrad2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="800" y1="150" x2="830" y2="150" stroke="url(#flowGrad2)" stroke-width="1.5" marker-end="url(#arrow)"/>
+      </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VERIFICATION & TRUST MODEL ============ -->
+<section id="verification" class="section border-b border-line bg-surface/40">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Verification &amp; trust model</h2>
+    <p class="text-sm text-muted mb-6 max-w-2xl leading-relaxed">
+      Six findings were cross-checked live against official documentation, not simulated. One of the agent's own
+      answers was wrong — here's exactly what it got wrong, and what fixed it. Accuracy is computed only from
+      these six, so the number reflects claims that were actually tested, not the whole 100-app dataset.
+    </p>
+
+    <div class="card p-5 grid md:grid-cols-3 gap-5 text-xs text-muted leading-relaxed mb-6">
+      <div><span class="text-ink font-medium block mb-1">Sampling strategy</span>{{ verification.methodology.sampling_strategy }}</div>
+      <div><span class="text-ink font-medium block mb-1">Disagreement resolution</span>{{ verification.methodology.disagreement_resolution }}</div>
+      <div><span class="text-ink font-medium block mb-1">Confidence formula</span>{{ verification.methodology.confidence_formula }}</div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold">{{ verification.methodology.doc_verified_count }}</div>
+        <div class="text-sm text-muted">Apps doc-checked live (accuracy sample)</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold text-warn">{{ (verification.initial_accuracy * 100) | round(0) | int }}%</div>
+        <div class="text-sm text-muted">Initial accuracy (first pass, n={{ verification.methodology.doc_verified_count }})</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold text-good">{{ (verification.final_accuracy * 100) | round(0) | int }}%</div>
+        <div class="text-sm text-muted">Final accuracy (after the loop, n={{ verification.methodology.doc_verified_count }})</div>
+      </div>
+      <div class="card p-5">
+        <div class="text-3xl font-display font-semibold text-indigo">{{ verification.methodology.pending_review_count }}</div>
+        <div class="text-sm text-muted">Flagged, pending human review (not counted above)</div>
+      </div>
+    </div>
+
+    <div class="card overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-surface2">
+          <tr class="text-left text-muted uppercase text-xs tracking-wide">
+            <th class="px-4 py-3">App</th>
+            <th class="px-4 py-3">Field checked</th>
+            <th class="px-4 py-3">Agent said (first pass)</th>
+            <th class="px-4 py-3">Docs actually say</th>
+            <th class="px-4 py-3">Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in verification.checks[:6] %}
+          <tr class="border-t border-line align-top">
+            <td class="px-4 py-3 font-medium whitespace-nowrap">{{ c.app_name }}</td>
+            <td class="px-4 py-3 text-muted text-xs">{{ c.field_checked }}</td>
+            <td class="px-4 py-3 text-xs text-muted max-w-xs">{{ c.agent_answer }}</td>
+            <td class="px-4 py-3 text-xs text-muted max-w-xs">{{ c.doc_answer }}</td>
+            <td class="px-4 py-3">
+              {% if c.result == 'correct' %}
+              <span class="badge bg-good/10 text-good border-good/30">CORRECT</span>
+              {% elif c.result == 'updated' %}
+              <span class="badge bg-warn/10 text-warn border-warn/30">CORRECTED</span>
+              {% else %}
+              <span class="badge bg-bad/10 text-bad border-bad/30">INCORRECT</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-muted mt-3">Sources: {% for c in verification.checks[:6] %}<a href="{{ c.source_url }}" class="evidence-link text-teal underline mr-3" target="_blank" rel="noopener">{{ c.app_name }}↗</a>{% endfor %}</p>
+
+    <div id="human-review" class="mt-10">
+      <h3 class="font-display font-semibold text-lg mb-2">Human review queue</h3>
+      <p class="text-sm text-muted mb-4 max-w-2xl leading-relaxed">
+        Auto-routed here by the confidence re-scorer because evidence was thin, gated, or self-contradictory.
+        Not counted as errors above — they're the honest "not sure yet" pile a reviewer should clear before relying on them.
+      </p>
+      <div class="flex flex-wrap gap-1.5">
+        {% for c in verification.checks[6:] %}
+        <span class="badge bg-surface2 text-muted border-line" title="{{ c.agent_answer }}">{{ c.app_name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERACTIVE DATASET ============ -->
+<section id="dataset" class="section border-b border-line">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Integration readiness dataset</h2>
+    <p class="text-sm text-muted mb-6 max-w-2xl">Search, filter, sort, and expand any row for full evidence — this is meant to be used as an operations tool, not just read once.</p>
+
+    <div class="flex flex-col lg:flex-row gap-3 mb-4">
+      <input id="searchInput" type="text" placeholder="Search app, category, blocker…"
+        class="flex-1 bg-surface border border-line rounded-md px-4 py-2.5 text-sm placeholder:text-muted">
+      <div class="grid grid-cols-2 lg:flex gap-2">
+        <select id="categoryFilter" class="bg-surface border border-line rounded-md px-3 py-2.5 text-sm"><option value="">All categories</option></select>
+        <select id="selfServeFilter" class="bg-surface border border-line rounded-md px-3 py-2.5 text-sm"><option value="">All self-serve models</option></select>
+        <select id="buildFilter" class="bg-surface border border-line rounded-md px-3 py-2.5 text-sm">
+          <option value="">All buildability</option><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option><option value="Impossible">Impossible</option>
+        </select>
+        <select id="verificationFilter" class="bg-surface border border-line rounded-md px-3 py-2.5 text-sm">
+          <option value="">All verification status</option><option value="human_verified">Human-verified</option><option value="agent_verified">Agent-verified</option><option value="flagged">Flagged</option>
+        </select>
+        <select id="confidenceFilter" class="bg-surface border border-line rounded-md px-3 py-2.5 text-sm">
+          <option value="">All confidence</option><option value="high">High (≥70)</option><option value="medium">Medium (40-69)</option><option value="low">Low (&lt;40)</option>
+        </select>
+      </div>
+    </div>
+    <div class="text-xs text-muted mb-2"><span id="resultCount"></span> — click a row for full evidence, click a column header to sort</div>
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto max-h-[640px] overflow-y-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-surface2 sticky top-0 z-10">
+            <tr class="text-left text-muted uppercase text-xs tracking-wide">
+              <th class="px-4 py-3 sortable" data-key="name">App <span class="arrow">↕</span></th>
+              <th class="px-4 py-3 sortable" data-key="category">Category <span class="arrow">↕</span></th>
+              <th class="px-4 py-3">Auth</th>
+              <th class="px-4 py-3 sortable" data-key="self_serve">Self-serve <span class="arrow">↕</span></th>
+              <th class="px-4 py-3">MCP</th>
+              <th class="px-4 py-3 sortable" data-key="buildability">Buildability <span class="arrow">↕</span></th>
+              <th class="px-4 py-3 sortable" data-key="confidence">Confidence <span class="arrow">↕</span></th>
+              <th class="px-4 py-3 sortable" data-key="verification_status">Status <span class="arrow">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTHENTICATION LANDSCAPE & PATTERN ANALYSIS ============ -->
+<section id="patterns" class="section border-b border-line bg-surface/40">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Authentication landscape &amp; pattern analysis</h2>
+    <p class="text-sm text-muted mb-8 max-w-2xl">Computed live from the verified dataset with pandas — see <code class="font-mono text-xs bg-surface2 px-1 rounded">pipeline/pattern_analysis.py</code>. Every chart below answers exactly one question.</p>
+
+    <div class="grid md:grid-cols-2 gap-5 mb-5">
+      <div class="card p-5">
+        <canvas id="authChart" height="200"></canvas>
+        <p class="text-xs text-muted mt-3 pt-3 border-t border-line">So what: <span class="text-ink">{{ insights.oauth_vs_key_pct.oauth_pct }}% of apps need an OAuth2 app-registration flow</span> before Composio can call them — the single biggest driver of onboarding time across the dataset.</p>
+      </div>
+      <div class="card p-5">
+        <canvas id="mcpChart" height="200"></canvas>
+        <p class="text-xs text-muted mt-3 pt-3 border-t border-line">So what: <span class="text-ink">{{ insights.mcp_none_pct }}% of apps have zero MCP coverage</span> — official or community — which is the addressable surface for new Composio-built or community toolkits.</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-5 mb-5">
+      <div class="card p-5">
+        <canvas id="selfServeByCategoryChart" height="240"></canvas>
+        <p class="text-xs text-muted mt-3 pt-3 border-t border-line">So what: <span class="text-ink">{{ insights.most_gated_category }}</span> needs a partnership/BD motion planned alongside any engineering roadmap for that category — self-serve access can't be assumed.</p>
+      </div>
+      <div class="card p-5">
+        <canvas id="buildabilityChart" height="240"></canvas>
+        <p class="text-xs text-muted mt-3 pt-3 border-t border-line">So what: <span class="text-ink">{{ insights.buildability_counts.get('Easy', 0) }} apps are buildable with no blockers today</span> — that's the ready-to-ship backlog before any outreach work is needed.</p>
+      </div>
+    </div>
+    <div class="card p-5 mb-5">
+      <h3 class="font-display font-semibold text-sm mb-3">Most common blockers</h3>
+      <canvas id="blockersChart" height="110"></canvas>
+      <p class="text-xs text-muted mt-3 pt-3 border-t border-line">So what: the top blocker determines which team should act — a documentation gap is an engineering fix, an enterprise/contact-sales gate is a partnerships problem.</p>
+    </div>
+
+    <div class="card p-6">
+      <h3 class="font-display font-semibold mb-1">Which auth methods create the most implementation effort?</h3>
+      <p class="text-xs text-muted mb-4 max-w-2xl leading-relaxed">
+        OAuth2 needs app registration, a redirect/consent flow, and token-refresh handling before the first API call —
+        static credentials (API key / PAT / Bearer) are copy-paste-and-go. This explains <span class="text-ink">why</span>
+        some categories take longer to onboard even when they're technically "self-serve."
+      </p>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div>
+          <canvas id="authEffortChart" height="220"></canvas>
+          <p class="text-xs text-muted mt-3 pt-3 border-t border-line">So what: budget roughly 2-3x the integration time for "Higher" effort apps vs. "Low" — that's real engineering-hours signal, not just an auth label.</p>
+        </div>
+        <div>
+          <p class="text-xs text-muted mb-2 uppercase tracking-wide font-mono">% of category requiring OAuth2 flow</p>
+          <div class="space-y-2">
+            {% for cat, pct in insights.auth_effort_by_category_oauth_pct.items() %}
+            <div class="flex items-center gap-3 text-xs">
+              <span class="w-40 text-muted truncate">{{ cat }}</span>
+              <div class="flex-1 bg-surface2 rounded h-2 overflow-hidden"><div class="bg-indigo h-2" style="width:{{ pct }}%"></div></div>
+              <span class="w-10 text-right text-ink">{{ pct }}%</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ BUSINESS INSIGHTS ============ -->
+<section id="business" class="section border-b border-line">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-display text-2xl md:text-3xl font-semibold mb-2">Business insights: where to build first</h2>
+    <p class="text-sm text-muted mb-6 max-w-2xl leading-relaxed">
+      <span class="text-ink">Composio Build-Priority Score (0-100)</span> = self-serve access model (≤30) + buildability
+      verdict (≤30) + API breadth (≤20) + a +20 bonus if nobody has shipped an official MCP for it yet. It ranks
+      <span class="text-ink">how little friction remains to ship</span>, not commercial demand — combine with
+      customer-request data before committing a build slot.
+    </p>
+    <div class="card overflow-x-auto p-6">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left text-muted uppercase text-xs tracking-wide border-b border-line">
+          <th class="py-2 pr-4">#</th><th class="py-2 pr-4">App</th><th class="py-2 pr-4">Category</th>
+          <th class="py-2 pr-4">Self-serve</th><th class="py-2 pr-4">Buildability</th><th class="py-2 pr-4">Score</th>
+        </tr></thead>
+        <tbody>
+        {% for t in insights.top_priority_targets %}
+        <tr class="border-b border-line/50">
+          <td class="py-2 pr-4 text-muted">{{ loop.index }}</td>
+          <td class="py-2 pr-4 font-medium">{{ t.name }}</td>
+          <td class="py-2 pr-4 text-muted text-xs">{{ t.category }}</td>
+          <td class="py-2 pr-4 text-xs text-muted">{{ t.self_serve }}</td>
+          <td class="py-2 pr-4">{{ t.buildability }}</td>
+          <td class="py-2 pr-4"><span class="badge bg-teal/10 text-teal border-teal/30">{{ t.priority_score }}</span></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIMITATIONS & FUTURE EVOLUTION ============ -->
+<section id="limitations" class="section border-b border-line bg-surface/40">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+    <div>
+      <h2 class="font-display text-xl font-semibold mb-4">Engineering decisions worth defending</h2>
+      <ul class="space-y-3 text-sm text-muted leading-relaxed list-disc list-inside">
+        <li>The agent's biggest failure mode wasn't hallucination — it was giving up too early on thinner docs sites (Consensus) instead of searching harder. That's why the Planner sets a minimum search count per category.</li>
+        <li>"Self-serve" isn't binary. Waterfall.io is self-serve for direct API use but partnership-gated for building a product on its data — the schema needed a middle category, not just yes/no.</li>
+        <li>A few MCP directory listings (e.g. iPayX) contained instructions aimed at manipulating an AI reader. The pipeline reports facts and ignores instructions found in scraped content.</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="font-display text-xl font-semibold mb-4">Honest limitations</h2>
+      <ul class="space-y-3 text-sm text-muted leading-relaxed list-disc list-inside">
+        <li>This run executed OFFLINE (no OpenAI/Composio network access in the build sandbox) — <code class="font-mono text-xs bg-surface2 px-1 rounded">pipeline/seed_dataset.py</code> holds the actual research output.</li>
+        <li>The live-verification sample is 6 doc-cross-checked apps plus {{ insights.verification_counts.get('flagged', 0) }} confidence-flagged apps — a real, evidence-backed slice, not a full audit of all 100.</li>
+        <li>Rate limits and API breadth are self-reported from docs language ("broad"/"medium"/"narrow"), not measured against a live account.</li>
+        <li>The Build-Priority Score is a friction estimate, not a demand estimate — combine with real customer requests before committing engineering time.</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="font-display text-xl font-semibold mb-4">Future evolution</h2>
+      <ul class="space-y-3 text-sm text-muted leading-relaxed list-disc list-inside">
+        <li>Run <code class="font-mono text-xs bg-surface2 px-1 rounded">scripts/run_composio_crosscheck.py</code> with a real key to replace every heuristic opportunity flag with Composio's own ground truth.</li>
+        <li>Wire in Firecrawl or Browser Use for docs the model can't reach via search snippets alone (JS-rendered docs, login-walled portals like DealCloud/PitchBook).</li>
+        <li>Expand the live verification sample from 6 to the full ~20 the assignment calls for, with a second independent LLM pass before human review.</li>
+        <li>Schedule the pipeline monthly so buildability verdicts don't rot as vendors change auth models or ship new MCP servers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REPO / DEMO ============ -->
+<section id="repo" class="section">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="card p-8 grid md:grid-cols-2 gap-6">
+      <div>
+        <h2 class="font-display text-2xl font-semibold">Source repository</h2>
+        <p class="text-sm text-muted mt-2 leading-relaxed">Full pipeline code, README, requirements.txt, .env.example, and this dashboard generator.</p>
+        <a href="#" class="inline-block mt-4 px-4 py-2 rounded-md bg-gradient-to-r from-teal to-indigo text-bg font-medium text-sm">[ Repo link placeholder — add before submitting ]</a>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl font-semibold">Live demo</h2>
+        <p class="text-sm text-muted mt-2 leading-relaxed">This page, deployed as a static file (GitHub Pages, Vercel, Netlify).</p>
+        <a href="#" class="inline-block mt-4 px-4 py-2 rounded-md border border-line text-sm">[ Live demo link placeholder — add before submitting ]</a>
+      </div>
+    </div>
+    <p class="text-center text-xs text-muted mt-10">Built for the Composio AI Product Ops Intern take-home · data current as of pipeline run time</p>
+  </div>
+</section>
+
+<!-- ============ EMBEDDED DATA ============ -->
+<script type="application/json" id="apps-data">{{ apps | tojson }}</script>
+<script type="application/json" id="insights-data">{{ insights | tojson }}</script>
+
+<script>
+const APPS = JSON.parse(document.getElementById('apps-data').textContent);
+const INSIGHTS = JSON.parse(document.getElementById('insights-data').textContent);
+
+// ---------- populate filters ----------
+const categories = [...new Set(APPS.map(a => a.category))].sort();
+const catSel = document.getElementById('categoryFilter');
+categories.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; catSel.appendChild(o); });
+
+const selfServeModels = [...new Set(APPS.map(a => a.self_serve))].sort();
+const ssSel = document.getElementById('selfServeFilter');
+const ssLabels = {
+  open: 'Open (no gate)', freemium_signup: 'Freemium signup', trial_required: 'Trial required',
+  admin_approval_required: 'Admin approval required', paid_plan_required: 'Paid plan required',
+  partnership_required: 'Partnership required', contact_sales_only: 'Contact sales only', gated_unclear: 'Gated / unclear'
+};
+selfServeModels.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = ssLabels[s] || s; ssSel.appendChild(o); });
+
+// ---------- badge helpers ----------
+function buildBadge(level) {
+  const map = { Easy: 'bg-good/10 text-good border-good/30', Medium: 'bg-warn/10 text-warn border-warn/30',
+                Hard: 'bg-bad/10 text-bad border-bad/30', Impossible: 'bg-bad/20 text-bad border-bad/50' };
+  return `<span class="badge border ${map[level] || ''}">${level}</span>`;
+}
+function statusBadge(status) {
+  const map = { human_verified: ['bg-teal/10 text-teal border-teal/30', 'HUMAN-VERIFIED'],
+                agent_verified: ['bg-indigo/10 text-indigo border-indigo/30', 'AGENT-VERIFIED'],
+                flagged: ['bg-warn/10 text-warn border-warn/30', 'FLAGGED'],
+                unverified: ['bg-surface2 text-muted border-line', 'UNVERIFIED'] };
+  const [cls, label] = map[status] || ['bg-surface2 text-muted border-line', status];
+  return `<span class="badge border ${cls}">${label}</span>`;
+}
+function confBadge(score) {
+  let cls = 'bg-good/10 text-good border-good/30';
+  if (score < 70) cls = 'bg-warn/10 text-warn border-warn/30';
+  if (score < 40) cls = 'bg-bad/10 text-bad border-bad/30';
+  return `<span class="badge border ${cls}">${score}</span>`;
+}
+function mcpBadge(mcp) {
+  if (mcp.official) return `<span class="badge bg-teal/10 text-teal border border-teal/30">OFFICIAL</span>`;
+  if (mcp.community) return `<span class="badge bg-indigo/10 text-indigo border border-indigo/30">COMMUNITY</span>`;
+  return `<span class="badge bg-surface2 text-muted border border-line">NONE</span>`;
+}
+
+// ---------- render table ----------
+const tbody = document.getElementById('tableBody');
+function renderTable(rows) {
+  tbody.innerHTML = '';
+  document.getElementById('resultCount').textContent = `${rows.length} of ${APPS.length} apps`;
+  rows.forEach((a) => {
+    const tr = document.createElement('tr');
+    tr.className = 'border-t border-line hover:bg-surface2 cursor-pointer';
+    tr.innerHTML = `
+      <td class="px-4 py-3 font-medium">${a.name}</td>
+      <td class="px-4 py-3 text-muted text-xs whitespace-nowrap">${a.category}</td>
+      <td class="px-4 py-3 text-xs text-muted">${a.auth.join(', ')}</td>
+      <td class="px-4 py-3 text-xs text-muted whitespace-nowrap">${ssLabels[a.self_serve] || a.self_serve}</td>
+      <td class="px-4 py-3">${mcpBadge(a.mcp)}</td>
+      <td class="px-4 py-3">${buildBadge(a.buildability)}</td>
+      <td class="px-4 py-3">${confBadge(a.confidence)}</td>
+      <td class="px-4 py-3">${statusBadge(a.verification_status)}</td>
+    `;
+    const detail = document.createElement('tr');
+    detail.className = 'table-row-expand border-t border-line bg-surface2/50';
+    detail.innerHTML = `
+      <td colspan="8" class="px-4 py-4 text-xs text-muted">
+        <p class="mb-2"><span class="text-ink font-medium">${a.description}</span></p>
+        <p class="mb-2">${a.self_serve_detail || ''}</p>
+        ${a.blocker ? `<p class="mb-2 text-warn">Blocker: ${a.blocker}</p>` : ''}
+        <p class="mb-2">API surface: REST=${a.api_surface.rest} · GraphQL=${a.api_surface.graphql} · Webhooks=${a.api_surface.webhooks} · Breadth=${a.api_surface.breadth || 'n/a'} · Rate limits=${a.api_surface.rate_limits || 'n/a'}</p>
+        <p class="mb-2">MCP notes: ${a.mcp.notes || 'n/a'}</p>
+        ${a.notes ? `<p class="mb-2 italic">${a.notes}</p>` : ''}
+        <a href="${a.evidence}" target="_blank" rel="noopener" class="evidence-link text-teal underline">${a.evidence} ↗</a>
+      </td>`;
+    tr.addEventListener('click', () => detail.classList.toggle('open'));
+    tbody.appendChild(tr);
+    tbody.appendChild(detail);
+  });
+}
+renderTable(APPS);
+
+// ---------- filtering ----------
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const cat = catSel.value, ss = ssSel.value, build = document.getElementById('buildFilter').value;
+  const verif = document.getElementById('verificationFilter').value;
+  const conf = document.getElementById('confidenceFilter').value;
+  return APPS.filter(a => {
+    const matchesQ = !q || a.name.toLowerCase().includes(q) || a.category.toLowerCase().includes(q) ||
+      (a.blocker || '').toLowerCase().includes(q) || a.description.toLowerCase().includes(q);
+    const matchesCat = !cat || a.category === cat;
+    const matchesSS = !ss || a.self_serve === ss;
+    const matchesBuild = !build || a.buildability === build;
+    const matchesVerif = !verif || a.verification_status === verif;
+    const matchesConf = !conf || (conf === 'high' && a.confidence >= 70) ||
+      (conf === 'medium' && a.confidence >= 40 && a.confidence < 70) || (conf === 'low' && a.confidence < 40);
+    return matchesQ && matchesCat && matchesSS && matchesBuild && matchesVerif && matchesConf;
+  });
+}
+
+let sortKey = null, sortDir = 1;
+function applyFilters() {
+  let rows = getFiltered();
+  if (sortKey) {
+    rows = [...rows].sort((a, b) => {
+      const av = a[sortKey], bv = b[sortKey];
+      if (typeof av === 'number') return (av - bv) * sortDir;
+      return String(av).localeCompare(String(bv)) * sortDir;
+    });
+  }
+  renderTable(rows);
+}
+['searchInput'].forEach(id => document.getElementById(id).addEventListener('input', applyFilters));
+['categoryFilter','selfServeFilter','buildFilter','verificationFilter','confidenceFilter'].forEach(id =>
+  document.getElementById(id).addEventListener('change', applyFilters));
+
+document.querySelectorAll('th.sortable').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (sortKey === key) { sortDir *= -1; } else { sortKey = key; sortDir = 1; }
+    document.querySelectorAll('th.sortable').forEach(t => t.classList.remove('active'));
+    th.classList.add('active');
+    th.querySelector('.arrow').textContent = sortDir === 1 ? '↑' : '↓';
+    applyFilters();
+  });
+});
+
+// ---------- charts ----------
+Chart.defaults.color = '#8993AC';
+Chart.defaults.font.family = 'Inter';
+Chart.defaults.borderColor = '#232D42';
+
+new Chart(document.getElementById('authChart'), {
+  type: 'bar',
+  data: { labels: Object.keys(INSIGHTS.auth_distribution_chart),
+    datasets: [{ label: 'Apps', data: Object.values(INSIGHTS.auth_distribution_chart), backgroundColor: '#4FD1C5', borderRadius: 4 }] },
+  options: { indexAxis: 'y', plugins: { legend: { display: false }, title: { display: true, text: 'Auth method distribution (top 7 + long tail)', color: '#E7ECF6' } },
+    scales: { x: { grid: { color: '#232D42' } }, y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
+});
+
+const mcpData = [INSIGHTS.mcp_official_count, INSIGHTS.mcp_community_count, INSIGHTS.mcp_none_count];
+new Chart(document.getElementById('mcpChart'), {
+  type: 'doughnut',
+  data: { labels: ['Official MCP', 'Community MCP', 'No MCP'], datasets: [{ data: mcpData, backgroundColor: ['#4FD1C5', '#7C87F8', '#232D42'] }] },
+  options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }, title: { display: true, text: 'MCP coverage', color: '#E7ECF6' } } }
+});
+
+const catLabels = INSIGHTS.self_serve_by_category.map(c => c.category);
+const catValues = INSIGHTS.self_serve_by_category.map(c => c.self_serve_pct);
+new Chart(document.getElementById('selfServeByCategoryChart'), {
+  type: 'bar',
+  data: { labels: catLabels, datasets: [{ label: '% self-serve', data: catValues, backgroundColor: '#4FD1C5', borderRadius: 4 }] },
+  options: { indexAxis: 'y', plugins: { legend: { display: false }, title: { display: true, text: 'Self-serve rate by category', color: '#E7ECF6' } },
+    scales: { x: { grid: { color: '#232D42' }, max: 100 }, y: { grid: { display: false } } } }
+});
+
+const buildLabels = Object.keys(INSIGHTS.buildability_counts);
+const buildValues = Object.values(INSIGHTS.buildability_counts);
+const buildColors = { Easy: '#34D399', Medium: '#FBBF24', Hard: '#FB7185', Impossible: '#7f1d2b' };
+new Chart(document.getElementById('buildabilityChart'), {
+  type: 'bar',
+  data: { labels: buildLabels, datasets: [{ label: 'Apps', data: buildValues, backgroundColor: buildLabels.map(l => buildColors[l]), borderRadius: 4 }] },
+  options: { plugins: { legend: { display: false }, title: { display: true, text: 'Buildability verdict distribution', color: '#E7ECF6' } },
+    scales: { x: { grid: { display: false } }, y: { grid: { color: '#232D42' } } } }
+});
+
+const blockerLabels = Object.keys(INSIGHTS.top_blockers);
+const blockerValues = Object.values(INSIGHTS.top_blockers);
+new Chart(document.getElementById('blockersChart'), {
+  type: 'bar',
+  data: { labels: blockerLabels, datasets: [{ label: 'Apps affected', data: blockerValues, backgroundColor: '#7C87F8', borderRadius: 4 }] },
+  options: { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#232D42' } }, y: { grid: { display: false } } } }
+});
+
+const effortLabelsFull = Object.keys(INSIGHTS.auth_effort_counts);
+const effortValues = Object.values(INSIGHTS.auth_effort_counts);
+// Full effort-tier descriptions are long (e.g. "Higher (OAuth2 app registration +
+// consent flow + token refresh)") -- unreadable as chart tick labels or a donut
+// legend. Show a short tier name on the axis; keep the full description as the
+// tooltip, so the chart stays scannable without losing the explanatory detail.
+const effortShortLabels = effortLabelsFull.map(l => l.split(' (')[0]);
+new Chart(document.getElementById('authEffortChart'), {
+  type: 'bar',
+  data: { labels: effortShortLabels, datasets: [{ label: 'Apps', data: effortValues,
+    backgroundColor: ['#FB7185','#4FD1C5','#FBBF24','#8993AC'], borderRadius: 4 }] },
+  options: { indexAxis: 'y', plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Implementation effort by auth type', color: '#E7ECF6' },
+      tooltip: { callbacks: { title: (items) => effortLabelsFull[items[0].dataIndex] } }
+    },
+    scales: { x: { grid: { color: '#232D42' } }, y: { grid: { display: false } } } }
+});
+</script>
+</body>
+</html>
